@@ -67,6 +67,47 @@ function handlePasswordInput() {
   password = document.getElementById("passwordInput").value;
 }
 
+// Function to handle the login button click
+function handleLogin() {
+  if (!username || !password) {
+    alert("Please enter both username and password.");
+    return;
+  }
+
+  alert(`Logged in as ${username}`);
+  clearInputs();
+}
+
+// Function to handle the signup button click
+function handleSignup() {
+  if (!username || !password) {
+    alert("Please enter both username and password.");
+    return;
+  }
+
+  alert(`Signed up with username ${username}`);
+  clearInputs();
+}
+
+// Function to clear the input fields
+function clearInputs() {
+  document.getElementById("usernameInput").value = "";
+  document.getElementById("passwordInput").value = "";
+}
+
+// Function to handle the Enter key press
+function handleKeyPress(event) {
+  if (event.key === "Enter") {
+    if (document.activeElement === document.getElementById("guessInput")) {
+      handleGuess();
+    } else if (document.activeElement === document.getElementById("usernameInput")) {
+      handleSignup();
+    } else if (document.activeElement === document.getElementById("passwordInput")) {
+      handleSignup();
+    }
+  }
+}
+
 // Function to display the leaderboard
 function showLeaderboard() {
   const leaderboardContainer = document.getElementById("leaderboard");
