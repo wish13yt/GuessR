@@ -17,7 +17,7 @@ function checkGuess(randomNumber, guess) {
 // Example usage
 const minRange = 1;
 const maxRange = 100;
-let randomNumber;
+let randomNumber = generateRandomNumber(minRange, maxRange);
 let attempts = 0;
 let leaderboard = []; // Array to store leaderboard data
 
@@ -31,10 +31,6 @@ function handleGuess() {
   }
 
   attempts++;
-
-  if (!randomNumber) {
-    randomNumber = generateRandomNumber(minRange, maxRange);
-  }
 
   const result = checkGuess(randomNumber, guess);
 
@@ -52,30 +48,30 @@ function handleGuess() {
 
     // Reset the game
     attempts = 0;
-    randomNumber = undefined;
+    randomNumber = generateRandomNumber(minRange, maxRange);
+    document.getElementById("guessInput").value = "";
   } else {
     alert(`Your guess is ${result}. Try again!`);
   }
-
-  document.getElementById("guessInput").value = ""; // Clear the input field after each guess
 }
 
 // Function to display the leaderboard
 function showLeaderboard() {
-  const leaderboardContainer = document.getElementById("leaderboard");
-  leaderboardContainer.innerHTML = "<h2>Leaderboard</h2>";
+  const leaderboardTable = document.getElementById("leaderboard");
+  leaderboardTable.innerHTML = "<tr><th>Rank</th><th>Attempts</th></tr>";
 
   if (leaderboard.length > 0) {
-    const olElement = document.createElement("ol");
-
     leaderboard.forEach((entry, index) => {
-      const liElement = document.createElement("li");
-      liElement.textContent = `${index + 1}. ${entry.attempts} attempts`;
-      olElement.appendChild(liElement);
+      const row = leaderboardTable.insertRow();
+      const rankCell = row.insertCell();
+      const attemptsCell = row.insertCell();
+      rankCell.textContent = index + 1;
+      attemptsCell.textContent = entry.attempts;
     });
-
-    leaderboardContainer.appendChild(olElement);
   } else {
-    leaderboardContainer.innerHTML += "<p>No entries yet.</p>";
+    const row = leaderboardTable.insertRow();
+    const noEntriesCell = row.insertCell();
+    noEntriesCell.colSpan = 2;
+    noEntriesCell.textContent = "No entries yet.";
   }
 }
