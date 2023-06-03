@@ -66,11 +66,15 @@ function showLeaderboard() {
   leaderboardContainer.innerHTML = "<h2>Leaderboard</h2>";
 
   if (leaderboard.length > 0) {
-    leaderboardContainer.innerHTML += "<ol>";
+    const olElement = document.createElement("ol");
+
     leaderboard.forEach((entry, index) => {
-      leaderboardContainer.innerHTML += `<li>${index + 1}. ${entry.attempts} attempts</li>`;
+      const liElement = document.createElement("li");
+      liElement.textContent = `${index + 1}. ${entry.attempts} attempts`;
+      olElement.appendChild(liElement);
     });
-    leaderboardContainer.innerHTML += "</ol>";
+
+    leaderboardContainer.appendChild(olElement);
   } else {
     leaderboardContainer.innerHTML += "<p>No entries yet.</p>";
   }
