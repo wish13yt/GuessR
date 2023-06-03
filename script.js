@@ -39,6 +39,7 @@ function handleGuess() {
     // Reset the game
     attempts = 0;
     randomNumber = generateRandomNumber(minRange, maxRange);
+    location.reload();
   } else {
     alert(`Your guess is ${result}. Try again!`);
   }
