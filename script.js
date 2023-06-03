@@ -17,8 +17,8 @@ function checkGuess(randomNumber, guess) {
 // Example usage
 const minRange = 1;
 const maxRange = 100;
+let randomNumber = generateRandomNumber(minRange, maxRange);
 let attempts = 0;
-let randomNumber;
 
 // Function to handle user input and check the guess
 function handleGuess() {
@@ -31,10 +31,6 @@ function handleGuess() {
 
   attempts++;
 
-  if (!randomNumber) {
-    randomNumber = generateRandomNumber(minRange, maxRange);
-  }
-
   const result = checkGuess(randomNumber, guess);
 
   if (result === "equal") {
@@ -42,10 +38,9 @@ function handleGuess() {
 
     // Reset the game
     attempts = 0;
-    randomNumber = undefined;
+    randomNumber = generateRandomNumber(minRange, maxRange);
+    document.getElementById("guessInput").value = "";
   } else {
     alert(`Your guess is ${result}. Try again!`);
   }
-
-  document.getElementById("guessInput").value = ""; // Clear the input field after each guess
 }
