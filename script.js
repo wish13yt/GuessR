@@ -20,6 +20,7 @@ const maxRange = 100;
 let randomNumber = generateRandomNumber(minRange, maxRange);
 let attempts = 0;
 let leaderboard = []; // Array to store leaderboard data
+let username = ""; // Variable to store the username
 
 // Function to handle user input and check the guess
 function handleGuess() {
@@ -35,10 +36,10 @@ function handleGuess() {
   const result = checkGuess(randomNumber, guess);
 
   if (result === "equal") {
-    alert(`Congratulations! You guessed the number ${randomNumber} in ${attempts} attempts.`);
+    alert(`Congratulations, ${username}! You guessed the number ${randomNumber} in ${attempts} attempts.`);
 
     // Add the result to the leaderboard
-    leaderboard.push({ attempts });
+    leaderboard.push({ username, attempts });
 
     // Sort the leaderboard based on the number of attempts (ascending order)
     leaderboard.sort((a, b) => a.attempts - b.attempts);
@@ -55,23 +56,46 @@ function handleGuess() {
   }
 }
 
+// Function to handle the username input
+function handleUsernameInput() {
+  username = document.getElementById("usernameInput").value;
+}
+
 // Function to display the leaderboard
 function showLeaderboard() {
-  const leaderboardTable = document.getElementById("leaderboard");
-  leaderboardTable.innerHTML = "<tr><th>Rank</th><th>Attempts</th></tr>";
+  const leaderboardContainer = document.getElementById("leaderboard");
+  leaderboardContainer.innerHTML = ""; // Clear the existing content
 
   if (leaderboard.length > 0) {
+    const table = document.createElement("table");
+    const headerRow = document.createElement("tr");
+    const rankHeader = document.createElement("th");
+    rankHeader.textContent = "Rank";
+    const usernameHeader = document.createElement("th");
+    usernameHeader.textContent = "Username";
+    const attemptsHeader = document.createElement("th");
+    attemptsHeader.textContent = "Attempts";
+    headerRow.appendChild(rankHeader);
+    headerRow.appendChild(usernameHeader);
+    headerRow.appendChild(attemptsHeader);
+    table.appendChild(headerRow);
+
     leaderboard.forEach((entry, index) => {
-      const row = leaderboardTable.insertRow();
-      const rankCell = row.insertCell();
-      const attemptsCell = row.insertCell();
+      const row = document.createElement("tr");
+      const rankCell = document.createElement("td");
       rankCell.textContent = index + 1;
+      const usernameCell = document.createElement("td");
+      usernameCell.textContent = entry.username;
+      const attemptsCell = document.createElement("td");
       attemptsCell.textContent = entry.attempts;
+      row.appendChild(rankCell);
+      row.appendChild(usernameCell);
+      row.appendChild(attemptsCell);
+      table.appendChild(row);
     });
+
+    leaderboardContainer.appendChild(table);
   } else {
-    const row = leaderboardTable.insertRow();
-    const noEntriesCell = row.insertCell();
-    noEntriesCell.colSpan = 2;
-    noEntriesCell.textContent = "No entries yet.";
+    leaderboardContainer.textContent = "No entries yet.";
   }
 }
