@@ -1,73 +1,13 @@
-let secretNumber;
-let attempts;
-let leaderboard = [];
-
-function generateRandomNumber() {
-  return Math.floor(Math.random() * 100) + 1;
-}
-
-function startNewGame() {
-  secretNumber = generateRandomNumber();
-  attempts = 0;
-  leaderboard = [];
-}
-
-function handleGuess() {
-  const guessInput = document.getElementById("guessInput");
-  const guess = parseInt(guessInput.value);
-
-  if (isNaN(guess)) {
-    updateMessage("Please enter a valid number");
-    return;
-  }
-
-  attempts++;
-
-  if (guess === secretNumber) {
-    updateMessage(`Congratulations! You guessed the number in ${attempts} attempts.`);
-    addLeaderboardEntry();
-    startNewGame();
-  } else if (guess < secretNumber) {
-    updateMessage("Too low! Guess higher.");
-  } else {
-    updateMessage("Too high! Guess lower.");
-  }
-
-  guessInput.value = "";
-  guessInput.focus();
-}
-
-function addLeaderboardEntry() {
-  const usernameInput = document.getElementById("usernameInput");
-  const username = usernameInput.value.trim();
-
-  if (username === "") {
-    return;
-  }
-
-  const leaderboardEntry = {
-    username: username,
-    attempts: attempts
-  };
-
-  leaderboard.push(leaderboardEntry);
-  leaderboard.sort((a, b) => a.attempts - b.attempts);
-
-  if (leaderboard.length > 10) {
-    leaderboard.pop();
-  }
-
-  updateLeaderboard();
-}
-
-function updateLeaderboard() {
+// Function to display the leaderboard
+function showLeaderboard() {
   const leaderboardContainer = document.getElementById("leaderboard");
-  leaderboardContainer.innerHTML = "";
+  leaderboardContainer.innerHTML = ""; // Clear the existing content
 
   if (leaderboard.length > 0) {
     const leaderboardTable = document.createElement("table");
     leaderboardTable.classList.add("leaderboard-table");
 
+    // Create table header row
     const headerRow = document.createElement("tr");
     const rankHeader = document.createElement("th");
     rankHeader.textContent = "Rank";
@@ -80,6 +20,7 @@ function updateLeaderboard() {
     headerRow.appendChild(attemptsHeader);
     leaderboardTable.appendChild(headerRow);
 
+    // Create table rows for each leaderboard entry
     leaderboard.forEach((entry, index) => {
       const row = document.createElement("tr");
       const rankCell = document.createElement("td");
@@ -95,22 +36,7 @@ function updateLeaderboard() {
     });
 
     leaderboardContainer.appendChild(leaderboardTable);
+  } else {
+    leaderboardContainer.textContent = "No entries yet.";
   }
 }
-
-function updateMessage(message) {
-  const messageElement = document.getElementById("message");
-  messageElement.textContent = message;
-}
-
-function handleEnterKey(event) {
-  if (event.keyCode === 13) {
-    handleGuess();
-  }
-}
-
-window.onload = function () {
-  const guessInput = document.getElementById("guessInput");
-  guessInput.addEventListener("keydown", handleEnterKey);
-  startNewGame();
-};
