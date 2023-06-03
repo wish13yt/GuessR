@@ -1,3 +1,3 @@
 # https://wishdog2013.github.io/GuessR/
-An online game where you guess a number.
+Guess a number a number from 1-100!
 To play the game, click the link above   ^
