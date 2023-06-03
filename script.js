@@ -21,6 +21,7 @@ let randomNumber = generateRandomNumber(minRange, maxRange);
 let attempts = 0;
 let leaderboard = []; // Array to store leaderboard data
 let username = ""; // Variable to store the username
+let password = ""; // Variable to store the password
 
 // Function to handle user input and check the guess
 function handleGuess() {
@@ -59,6 +60,11 @@ function handleGuess() {
 // Function to handle the username input
 function handleUsernameInput() {
   username = document.getElementById("usernameInput").value;
+}
+
+// Function to handle the password input
+function handlePasswordInput() {
+  password = document.getElementById("passwordInput").value;
 }
 
 // Function to display the leaderboard
