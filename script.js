@@ -17,8 +17,9 @@ function checkGuess(randomNumber, guess) {
 // Example usage
 const minRange = 1;
 const maxRange = 100;
-let randomNumber = generateRandomNumber(minRange, maxRange);
+let randomNumber;
 let attempts = 0;
+let leaderboard = []; // Array to store leaderboard data
 
 // Function to handle user input and check the guess
 function handleGuess() {
@@ -31,16 +32,46 @@ function handleGuess() {
 
   attempts++;
 
+  if (!randomNumber) {
+    randomNumber = generateRandomNumber(minRange, maxRange);
+  }
+
   const result = checkGuess(randomNumber, guess);
 
   if (result === "equal") {
     alert(`Congratulations! You guessed the number ${randomNumber} in ${attempts} attempts.`);
 
+    // Add the result to the leaderboard
+    leaderboard.push({ attempts });
+
+    // Sort the leaderboard based on the number of attempts (ascending order)
+    leaderboard.sort((a, b) => a.attempts - b.attempts);
+
+    // Display the leaderboard
+    showLeaderboard();
+
     // Reset the game
     attempts = 0;
-    randomNumber = generateRandomNumber(minRange, maxRange);
-    document.getElementById("guessInput").value = "";
+    randomNumber = undefined;
   } else {
     alert(`Your guess is ${result}. Try again!`);
+  }
+
+  document.getElementById("guessInput").value = ""; // Clear the input field after each guess
+}
+
+// Function to display the leaderboard
+function showLeaderboard() {
+  const leaderboardContainer = document.getElementById("leaderboard");
+  leaderboardContainer.innerHTML = "<h2>Leaderboard</h2>";
+
+  if (leaderboard.length > 0) {
+    leaderboardContainer.innerHTML += "<ol>";
+    leaderboard.forEach((entry, index) => {
+      leaderboardContainer.innerHTML += `<li>${index + 1}. ${entry.attempts} attempts</li>`;
+    });
+    leaderboardContainer.innerHTML += "</ol>";
+  } else {
+    leaderboardContainer.innerHTML += "<p>No entries yet.</p>";
   }
 }
