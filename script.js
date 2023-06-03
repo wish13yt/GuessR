@@ -17,7 +17,7 @@ function checkGuess(randomNumber, guess) {
 // Example usage
 const minRange = 1;
 const maxRange = 100;
-const randomNumber = generateRandomNumber(minRange, maxRange);
+let randomNumber = generateRandomNumber(minRange, maxRange);
 let attempts = 0;
 
 // Function to handle user input and check the guess
@@ -35,7 +35,10 @@ function handleGuess() {
 
   if (result === "equal") {
     alert(`Congratulations! You guessed the number ${randomNumber} in ${attempts} attempts.`);
-    // You can add additional logic here, such as updating the score or displaying a leaderboard.
+
+    // Reset the game
+    attempts = 0;
+    randomNumber = generateRandomNumber(minRange, maxRange);
   } else {
     alert(`Your guess is ${result}. Try again!`);
   }
