@@ -1,9 +1,12 @@
 <body>
   <h1>GuessR Number Game</h1>
+  <label for="usernameInput">Username:</label>
+  <input type="text" id="usernameInput" oninput="handleUsernameInput()" placeholder="Enter your username">
+  <br>
   <input type="number" id="guessInput" placeholder="Enter your guess">
   <button onclick="handleGuess()">Guess</button>
 
-  <table id="leaderboard"></table>
+  <div id="leaderboard"></div>
 
   <script src="script.js"></script>
 </body>
