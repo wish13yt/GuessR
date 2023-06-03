@@ -1,46 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>GuessR/title>
-  <style>
-    /* CSS styling for leaderboard */
-    .leaderboard-table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-
-    .leaderboard-table th,
-    .leaderboard-table td {
-      border: 1px solid black;
-      padding: 8px;
-      text-align: left;
-    }
-
-    .leaderboard-table th {
-      background-color: #f2f2f2;
-    }
-
-    .leaderboard-table tr:nth-child(even) {
-      background-color: #dddddd;
-    }
-  </style>
+  <title>GuessR Number</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <h1>GuessR Number Game</h1>
-  <label for="usernameInput">Username:</label>
-  <input type="text" id="usernameInput" oninput="handleUsernameInput()" placeholder="Enter your username">
-  <br>
-  <label for="passwordInput">Password:</label>
-  <input type="password" id="passwordInput" oninput="handlePasswordInput()" placeholder="Enter your password">
-  <br>
-  <input type="number" id="guessInput" placeholder="Enter your guess">
-  <button onclick="handleGuess()">Guess</button>
-  <button onclick="handleLogin()">Login</button>
-  <button onclick="handleSignup()">Signup</button>
+  <h1>GuessR Number</h1>
+  
+  <div id="game-container">
+    <h2>Game</h2>
+    <p id="message"></p>
+    <input type="number" id="guessInput" placeholder="Enter your guess">
+    <button onclick="handleGuess()">Guess</button>
+  </div>
 
-  <div id="leaderboard">
+  <div id="leaderboard-container">
     <h2>Leaderboard</h2>
-    <!-- Leaderboard table will be dynamically generated here -->
+    <div id="leaderboard"></div>
+  </div>
+
+  <div id="login-container">
+    <h2>Login / Sign Up</h2>
+    <input type="text" id="usernameInput" placeholder="Username">
+    <input type="password" id="passwordInput" placeholder="Password">
+    <button onclick="handleLogin()">Log In</button>
+    <button onclick="handleSignup()">Sign Up</button>
+    <button onclick="resetGame()">Reset Game</button>
   </div>
 
   <script src="script.js"></script>
