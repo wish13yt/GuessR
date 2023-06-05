@@ -1,17 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GuessR Beta</title>
+</head>
 <body>
-  <h1>GuessR</h1>
-  <label for="usernameInput">Username:</label>
-  <input type="text" id="usernameInput" oninput="handleUsernameInput()" placeholder="Enter your username">
-  <br>
-  <label for="passwordInput">Password:</label>
-  <input type="password" id="passwordInput" oninput="handlePasswordInput()" placeholder="Enter your password">
-  <br>
-  <input type="number" id="guessInput" placeholder="Enter your guess">
-  <button onclick="handleGuess()">Guess</button>
-  <button onclick="handleLogin()">Login</button>
-  <button onclick="handleSignup()">Signup</button>
-
-  <div id="leaderboard"></div>
-
+  <h1>GuessR Beta</h1>
+  
+  <div>
+    <label for="username">Username</label>
+    <input type="text" id="username" />
+  </div>
+  
+  <div>
+    <label for="password">Password</label>
+    <input type="password" id="password" />
+  </div>
+  
+  <div>
+    <button id="login-button">Log In</button>
+    <button id="signup-button">Sign Up</button>
+  </div>
+  
+  <h2>Guess the Number</h2>
+  <p>Enter a number between 1 and 100</p>
+  <input type="number" id="guess-input" />
+  <button id="submit-button">Submit</button>
+  
+  <h2>Leaderboard</h2>
+  <ul id="leaderboard-list"></ul>
+  
+  <p>Contact Support: <a href="mailto:guessrstatus@hotmail.com">guessrstatus@hotmail.com</a></p>
+  
   <script src="script.js"></script>
 </body>
+</html>
