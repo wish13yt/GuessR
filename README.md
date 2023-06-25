@@ -1,4 +1,4 @@
-# bit.ly/GuessR (link has been shortened)
+# www.bit.ly/GuessR (link has been shortened)
 Guess a number from 1-100!
 To play the game, click the link above   ^
 GuessR issues are noted here: https://wishdog2013.wixsite.com/guessr-number and https://twitter.com/GuessRStatus
